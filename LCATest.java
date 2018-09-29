@@ -1,11 +1,13 @@
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 class LCATest {
 
 	@Test
-	public void test() {
+	public void testLCA() {
 		LCA tree = new LCA();
 		
 		// Tree with 3 elements
@@ -134,6 +136,28 @@ class LCATest {
 		tree.root.left.left.left = new Node(4);
 		 
 		assertEquals(2, tree.findLCA(4, 2));
+		
+	}
+	
+	@Test
+	public void testNode()
+	{
+		/*
+		 * Test Node Class
+		 * 
+		 * When a node is created and given a value of 1 the data will become 1 and the left and right components will remain null.
+		 */
+		Node node = new Node(1);
+		
+		assertEquals(1, node.data);
+		
+		LCA tree = new LCA();
+		tree.root = new Node(1);
+		tree.root.left = new Node(2);
+		tree.root.right = new Node(3);
+		
+		assertEquals(2, tree.root.left.data);
+		assertEquals(3, tree.root.right.data);
 		
 	}
 }
