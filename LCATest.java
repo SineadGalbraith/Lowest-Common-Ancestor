@@ -116,5 +116,24 @@ class LCATest {
 		assertEquals(2, tree.findLCA(11, 12));
 		assertEquals(14, tree.findLCA(18, 24));
 		assertEquals(4, tree.findLCA(7, 11));
+		
+		tree = new LCA();
+		/* Tree with left nodes
+		 * 			1
+		 * 		   /
+		 * 		  2
+		 * 		 /
+		 * 		3
+		 * 	   / 
+		 * 	  4
+		 */
+		
+		tree.root = new Node(1);
+		tree.root.left = new Node(2);
+		tree.root.left.left = new Node(3);
+		tree.root.left.left.left = new Node(4);
+		 
+		assertEquals(2, tree.findLCA(4, 2));
+		
 	}
 }
