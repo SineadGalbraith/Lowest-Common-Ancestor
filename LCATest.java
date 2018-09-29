@@ -113,6 +113,7 @@ class LCATest {
 		tree.root.right.left.left.left.left = new Node(25);
 		tree.root.right.left.left.right.right = new Node(26);
 		
+		assertEquals(1, tree.findLCA(1, 26));
 		assertEquals(1, tree.findLCA(10, 26));
 		assertEquals(17, tree.findLCA(25, 26));
 		assertEquals(2, tree.findLCA(11, 12));
@@ -136,6 +137,18 @@ class LCATest {
 		tree.root.left.left.left = new Node(4);
 		 
 		assertEquals(2, tree.findLCA(4, 2));
+		
+		/*
+		 * Code also being tested when node does not exist, should return -1
+		 */
+		assertEquals(-1, tree.findLCA(3, 5));
+		
+		/*
+		 * Test for empty tree (should print -1, the same as above)
+		 */
+		
+		tree = new LCA();
+		assertEquals(-1, tree.findLCA(1, 3));
 		
 	}
 	
