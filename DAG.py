@@ -4,6 +4,7 @@ Created on 12 Oct 2018
 @author: sgal
 '''
 from Node import Node
+from test import test_keywordonlyarg
 class DAG:
     
     digraph = [] 
@@ -52,7 +53,6 @@ class DAG:
                 return node
         return None
     
-    
     def returnNodeByKey(self, nodeKey):
         for node in self.digraph:
             if node.key == nodeKey:
@@ -64,5 +64,14 @@ class DAG:
         if(node==None):
             return False
         return node.findIfPathExists(endKey)
-        
-        
+    
+    def lca(self, root, key1, key2):
+        root1 = self.returnNodeByKey(root)
+        return self.lowestCommonAncestor(root1, key1, key2).getKey()
+    
+    def lowestCommonAncestor(self, root, key1, key2):
+        for node in root.pointsTo:
+            if(self.existsPathBetween(node.getKey(), key1) and node.getKey() != key1 and node.getKey() != key2):
+                return self.lowestCommonAncestor(node, key1, key2)
+        return root
+    
