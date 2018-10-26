@@ -93,6 +93,41 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(dag.existsPathBetween(1,3), True)
         self.assertEqual(dag.existsPathBetween(3,5), False)
         self.assertEqual(dag.existsPathBetween(3,1), False)
+        
+    def test_addAcyclicEdge(self):
+        dag = DAG()
+        valueList = ["Node 1", "Node 2", "Node 3", "Node 4", "Node 5", "Node 6", "Node 7", "Node 8", "Node 9"]
+        keyList = [1,2,3,4,5,6,7,8,9]
+        edgeList = [[1,2],[1,4],[2,3],[4,3],[4,5]]
+        dag.addMulNode(valueList, keyList)
+        dag.addMulEdge(edgeList)
+        
+        dag.addAcyclicEdge(7,8)
+        dag.addAcyclicEdge(9,2)
+        dag.addAcyclicEdge(5,8)
+        dag.addAcyclicEdge(9,7)
+        
+        self.assertEqual(dag.existsPathBetween(7,8),True)
+        self.assertEqual(dag.existsPathBetween(9,2),True)
+        self.assertEqual(dag.existsPathBetween(2,9),False)
+        self.assertEqual(dag.existsPathBetween(5,8),True) 
+        self.assertEqual(dag.existsPathBetween(8,5),False)
+        self.assertEqual(dag.existsPathBetween(9,7),True)
+        self.assertEqual(dag.existsPathBetween(7,9),False)
+        self.assertEqual(dag.existsPathBetween(1,8),True)
+        self.assertEqual(dag.existsPathBetween(9,8),True)
+        self.assertEqual(dag.existsPathBetween(4,9),False)
+        self.assertEqual(dag.existsPathBetween(2,5),False)
+        self.assertEqual(dag.addAcyclicEdge(8,1), -1)
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
         
        
