@@ -10,15 +10,15 @@ from DAG import DAG
 class TestStringMethods(unittest.TestCase):
 
     def test_newNode(self):
-        newNode = Node(1, "Node 1")
+        node1 = Node(1, "Node 1")
         
-        self.assertEquals(newNode.getValue(), 1)
-        self.assertEquals(newNode.getKey(), "Node 1")
-        self.assertEquals(newNode.getLeft(), None)
-        self.assertEquals(newNode.getRight(), None)
+        self.assertEquals(node1.getValue(), 1)
+        self.assertEquals(node1.getKey(), "Node 1")
+        self.assertEquals(node1.getLeft(), None)
+        self.assertEquals(node1.getRight(), None)
         
-        newNode.setValue(2)
-        self.assertEquals(newNode.getValue(), 2)
+        node1.setValue(2)
+        self.assertEquals(node1.getValue(), 2)
         
     def test_node(self):
         dag = DAG()
@@ -34,7 +34,7 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(dag.returnNode(node1.getKey()),node1)
 
     def test_addEdge(self):
-        directed = DAG()
+        dag = DAG()
        
         node1 = Node(1, "Node 1")
         node2 = Node(2, "Node 2")
@@ -42,18 +42,18 @@ class TestStringMethods(unittest.TestCase):
         node4 = Node(4, "Node 4")
         node5 = Node(5, "Node 5")
         
-        directed.addNode(node1)
-        directed.addNode(node2)
-        directed.addNode(node3)
-        directed.addNode(node4)
-        directed.addNode(node5)
+        dag.addNode(node1)
+        dag.addNode(node2)
+        dag.addNode(node3)
+        dag.addNode(node4)
+        dag.addNode(node5)
 
-        directed.addEdge(node1, node2)
-        directed.addEdge(node2, node3)
-        directed.addEdge(node3, node1)
-        directed.addEdge(node4, node2)
-        directed.addEdge(node2, node5)
-        directed.addEdge(node5, node3)
+        dag.addEdge(node1, node2)
+        dag.addEdge(node2, node3)
+        dag.addEdge(node3, node1)
+        dag.addEdge(node4, node2)
+        dag.addEdge(node2, node5)
+        dag.addEdge(node5, node3)
         
         
         self.assertEqual(node1.hasEdgeTo(node2.getKey()), True)
@@ -120,6 +120,21 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(dag.existsPathBetween(2,5),False)
         self.assertEqual(dag.addAcyclicEdge(8,1), -1)
         
+    def test_LCA(self):
+        dag = DAG()
+        valueList = ["Node 1", "Node 2", "Node 3", "Node 4", "Node 5", "Node 6", "Node 7", "Node 8", "Node 9", "Node 10"]
+        keyList = [1,2,3,4,5,6,7,8,9,10]
+        edgeList = [[1,2],[1,4],[2,3],[2,5],[4,3],[4,5],[5,7],[5,10],[2,6],[6,7],[6,8],[3,9]]
+        dag.addMulNode(valueList, keyList)
+        dag.addMulEdge(edgeList)
+        
+        self.assertEqual(dag.lca(1,6,9),2)
+        self.assertEqual(dag.lca(1,2,4),1)
+        self.assertEqual(dag.lca(1,8,10),6)
+        self.assertEqual(dag.lca(3,1,9),3)
+        self.assertEqual(dag.lca(3,9,10),3)
+
+    
         
         
         
