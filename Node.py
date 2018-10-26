@@ -13,6 +13,7 @@ class Node:
         self.key = key 
         self.left = None
         self.right = None
+        self.pointsTo = []
         
     def getKey(self):
         return self.key
@@ -31,6 +32,13 @@ class Node:
     
     def pointsToNode(self, newNode):
         self.pointsTo.append(newNode)
+        
+    def returnNodesPointedTo(self, ):
+        sent = ""
+        for node in self.pointsTo:
+            sent = sent + str(node.getKey()) + "\n"
+            
+        return sent
         
     def hasEdgeTo(self,newNodeKey):
         for node in self.pointsTo:
