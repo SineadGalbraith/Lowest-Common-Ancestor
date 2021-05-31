@@ -1,4 +1,4 @@
-# CS3012---Lowest-Common-Ancestor
+# Lowest-Common-Ancestor
 
 This is a project for the 3rd Year Software Engineering module. 
 
